@@ -9,7 +9,7 @@ COLOR_WHITE=$(tput setaf 7)
 BOLD=$(tput bold)
 COLOR_RESET=$(tput sgr0)
 
-INSTALL_USER=whoami
+INSTALL_USER=$(whoami)
 
 function echo_red(){
 	echo "${COLOR_RED}${BOLD}$1${COLOR_RESET}"
@@ -23,10 +23,18 @@ function echo_yellow(){
 	echo "${COLOR_YELLOW}${BOLD}$1${COLOR_RESET}"
 }
 
+function echo_magenta(){
+	echo "${COLOR_MAGENTA}$1${COLOR_RESET}"
+}
 
-echo_red "this is a test"
-echo_yellow "of my new shell"
-echo_green "is it working?"
+
+function apt_install () {
+	echo_magenta "Installing: $1"
+	sudo apt-get -y install $1 > $1.install_log
+	echo_green "....Done"
+}
+
+
 
 
 ## Apt-install progs
@@ -35,8 +43,8 @@ sudo apt-get update
 ##Ubuntu
 sudo apt install net-tools
 #sudo apt install indicator-multiload
-sudo apt-get install chrome-gnome-shell
-sudo apt install gir1.2-gtop-2.0 lm-sensors
+#sudo apt-get install chrome-gnome-shell
+#sudo apt install gir1.2-gtop-2.0 lm-sensors
 
 
 ##OpenVPN
